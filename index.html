@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portofolio PPG | Nahlya, S.Pd</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+      :root {
+        --bg-main: #0f172a; /* Biru dongker sangat gelap */
+        --bg-surface: #1e293b; /* Warna permukaan card */
+        --primary-color: #0ea5e9; /* Biru cerah neon */
+        --accent-color: #10b981; /* Hijau emerald untuk aksen */
+        --text-main: #f8fafc; /* Putih cerah */
+        --text-muted: #cbd5e1; /* Abu-abu terang */
+        --border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+
+      /* ===== NAVBAR GLASSMORPHISM ===== */
+      nav {
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-color);
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      nav.scrolled {
+        padding: 10px 5%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-main);
+        text-decoration: none;
+        letter-spacing: 1px;
+      }
+
+      .logo span {
+        color: var(--primary-color);
+      }
+
+      ul.nav-links {
+        list-style: none;
+        display: flex;
+        align-items: center;
+      }
+
+      ul.nav-links li {
+        margin-left: 25px;
+        position: relative;
+      }
+
+      ul.nav-links a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-weight: 400;
+        font-size: 0.95rem;
+        transition: color 0.3s ease;
+        padding: 5px 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      ul.nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--primary-color);
+        transition: width 0.3s ease;
+      }
+
+      ul.nav-links a:hover {
+        color: var(--primary-color);
+      }
+
+      ul.nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* Dropdown */
+      .dropdown-content {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: 150%;
+        left: 0;
+        background-color: var(--bg-surface);
+        min-width: 250px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .dropdown:hover .dropdown-content {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+        top: 100%;
+      }
+
+      .dropdown-content a {
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .dropdown-content a::after {
+        display: none;
+      }
+
+      .dropdown-content a:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding-left: 25px;
+      }
+
+      /* Mobile Menu Icon */
+      .menu-btn {
+        display: none;
+        color: var(--text-main);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* ===== GLOBAL SECTIONS ===== */
+      section {
+        padding: 100px 5% 60px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      h2.section-title {
+        text-align: center;
+        font-size: 2.2rem;
+        color: var(--text-main);
+        margin-bottom: 60px;
+        position: relative;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      h2.section-title::after {
+        content: "";
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 2px;
+      }
+
+      /* ===== HOME SECTION ===== */
+      #home {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+        padding-top: 140px;
+      }
+
+      .home-image {
+        margin-bottom: 30px;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Efek cahaya di belakang foto */
+      .home-image::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 260px;
+        height: 260px;
+        background: var(--primary-color);
+        border-radius: 24px;
+        filter: blur(45px);
+        opacity: 0.25;
+        z-index: -1;
+        animation: pulse 4s infinite alternate;
+      }
+
+      .home-image img {
+        width: 240px;
+        height: 240px;
+        border-radius: 24px;
+        object-fit: cover;
+        border: 4px solid var(--bg-surface);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        animation: float 4s ease-in-out infinite;
+      }
+
+      .home-text {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .home-text h3 {
+        font-size: 1.2rem;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+      }
+
+      .home-text h1 {
+        font-size: 3.2rem;
+        color: var(--text-main);
+        margin-bottom: 20px;
+        line-height: 1.2;
+      }
+
+      .home-text h1 span {
+        background: linear-gradient(
+          90deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .home-text p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-bottom: 35px;
+        color: var(--text-muted);
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 14px 35px;
+        background: linear-gradient(45deg, var(--primary-color), #2563eb);
+        color: var(--text-main);
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3);
+      }
+
+      .btn:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 15px 25px rgba(14, 165, 233, 0.4);
+      }
+
+      /* ===== PROFIL SECTION ===== */
+      .profil-container {
+        background-color: var(--bg-surface);
+        border-radius: 15px;
+        border: 1px solid var(--border-color);
+        margin: 0 auto;
+        max-width: 900px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .profil-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          var(--primary-color),
+          var(--accent-color)
+        );
+      }
+
+      .profil-info {
+        padding: 50px;
+      }
+
+      .info-row {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 15px;
+      }
+
+      .info-row:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .info-row strong {
+        width: 250px;
+        color: var(--primary-color);
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      .info-row span {
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+
+      /* ===== ARTEFAK CARDS ===== */
+      .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background-color: var(--bg-surface);
+        border-radius: 15px;
+        padding: 35px;
+        border: 1px solid var(--border-color);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(14, 165, 233, 0.1) 0%,
+          transparent 100%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary-color);
+        box-shadow: 0 15px 30px rgba(14, 165, 233, 0.15);
+      }
+
+      .card:hover::before {
+        opacity: 1;
+      }
+
+      .card h3 {
+        color: var(--text-main);
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        line-height: 1.4;
+        position: relative;
+      }
+
+      .card p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        position: relative;
+      }
+
+      .tags {
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .tags span {
+        display: inline-block;
+        background-color: rgba(14, 165, 233, 0.1);
+        color: var(--primary-color);
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        margin-right: 8px;
+        margin-bottom: 8px;
+        font-weight: 600;
+        border: 1px solid rgba(14, 165, 233, 0.2);
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        background-color: #080c17;
+        color: var(--text-muted);
+        text-align: center;
+        padding: 30px;
+        font-size: 0.9rem;
+        border-top: 1px solid var(--border-color);
+      }
+
+      /* ===== ANIMATIONS ===== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease-out;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .delay-1 {
+        transition-delay: 0.2s;
+      }
+      .delay-2 {
+        transition-delay: 0.4s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-12px);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 0.15;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1.1);
+          opacity: 0.3;
+        }
+      }
+
+      /* ===== RESPONSIVE MOBILE ===== */
+      @media (max-width: 992px) {
+        .home-text h1 {
+          font-size: 2.6rem;
+        }
+        ul.nav-links li {
+          margin-left: 15px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .menu-btn {
+          display: block;
+        }
+        ul.nav-links {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: rgba(15, 23, 42, 0.98);
+          backdrop-filter: blur(15px);
+          flex-direction: column;
+          padding: 20px 0;
+          clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+          transition: all 0.4s ease;
+        }
+        ul.nav-links.active {
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+        ul.nav-links li {
+          margin: 15px 0;
+        }
+        .dropdown-content {
+          position: static;
+          visibility: visible;
+          opacity: 1;
+          box-shadow: none;
+          background: transparent;
+          border: none;
+          transform: none;
+          display: none;
+          width: 100%;
+          text-align: center;
+        }
+        .dropdown.active .dropdown-content {
+          display: flex;
+        }
+        .info-row {
+          flex-direction: column;
+        }
+        .info-row strong {
+          margin-bottom: 5px;
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="navbar">
+      <a href="#home" class="logo">Portofolio<span>.</span></a>
+      <div class="menu-btn" id="menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Beranda</a></li>
+        <li class="dropdown" id="profil-dropdown">
+          <a href="#profil"
+            >Profil Mahasiswa
+            <i class="fas fa-chevron-down" style="font-size: 0.7em"></i
+          ></a>
+          <div class="dropdown-content">
+            <a href="#profil">Tentang Saya</a>
+            <a href="keunikan-daerah.html">Keunikan Daerah</a>
+            <a href="inspirasi.html">Inspirasi dan Tujuan</a>
+          </div>
+        </li>
+        <li class="dropdown" id="artefak-dropdown">
+          <a href="#artefak"
+            >Artefak Pembelajaran
+            <i class="fas fa-chevron-down" style="font-size: 0.7em"></i
+          ></a>
+          <div class="dropdown-content">
+            <a href="artefak1.html">Siklus 1</a>
+            <a href="artefak2.html">Siklus 2</a>
+            <a href="artefak3.html">Siklus 3</a>
+          </div>
+        </li>
+        <li class="dropdown" id="lampiran-dropdown">
+          <a href="#lampiran"
+            >Lampiran
+            <i class="fas fa-chevron-down" style="font-size: 0.7em"></i
+          ></a>
+          <div class="dropdown-content">
+            <a href="penilaian.html">Penilaian Guru Pamong</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <section id="home">
+      <div class="home-image reveal">
+        <img src="foto.png" alt="Foto Nahlya, S.Pd" />
+      </div>
+
+      <div class="home-text reveal delay-1">
+        <h3>Calon Pendidik Profesional</h3>
+        <h1>Nahlya, <span>S.Pd</span></h1>
+        <p>
+          Berkomitmen untuk membentuk generasi yang memiliki karakter kuat,
+          nasionalisme, dan pemikiran kritis melalui pembelajaran Pendidikan
+          Pancasila dan Kewarganegaraan (PPKn) yang inovatif, bermakna, dan
+          berdiferensiasi.
+        </p>
+        <a href="#artefak" class="btn">Lihat Artefak Pembelajaran</a>
+      </div>
+    </section>
+
+    <section id="profil">
+      <h2 class="section-title reveal">Profil Mahasiswa PPG</h2>
+      <div class="profil-container reveal delay-1">
+        <div class="profil-info">
+          <div class="info-row">
+            <strong>Nama Lengkap</strong>
+            <span>Nahlya, S.Pd</span>
+          </div>
+          <div class="info-row">
+            <strong>Latar Belakang Pendidikan</strong>
+            <span
+              >S1 Pendidikan Pancasila dan Kewarganegaraan - Universitas
+              Muhammadiyah Mataram</span
+            >
+          </div>
+          <div class="info-row">
+            <strong>Fokus Keilmuan</strong>
+            <span
+              >Pendidikan Kewarganegaraan, Civic Education, Projek Penguatan
+              Profil Pelajar Pancasila (P5)</span
+            >
+          </div>
+          <div class="info-row">
+            <strong>Filosofi Pengajaran</strong>
+            <span
+              >Pola Pikir Bertumbuh (Growth Mindset) dengan pendekatan
+              kontekstual kultural. Mendidik bukan sekadar mentransfer
+              pengetahuan dasar negara, tetapi menumbuhkan kesadaran berwarga
+              negara yang kritis dan bertanggung jawab.</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="artefak">
+      <h2 class="section-title reveal">Artefak Pembelajaran & Praktik Baik</h2>
+      <div class="cards-container">
+        <div class="card reveal">
+          <div class="tags">
+            <span>Modul Ajar Terintegrasi</span>
+            <span>Differentiated Instruction</span>
+          </div>
+          <h3>Pengembangan Modul Ajar PPKn Berdiferensiasi</h3>
+          <p>
+            Rancangan pembelajaran yang mengakomodasi gaya belajar peserta didik
+            yang beragam. Modul ini berfokus pada materi Konstitusi dan Norma,
+            disusun dengan mengintegrasikan studi kasus sosial yang relevan
+            dengan kehidupan siswa sehari-hari.
+          </p>
+        </div>
+
+        <div class="card reveal delay-1">
+          <div class="tags">
+            <span>Project Based Learning</span>
+            <span>Civic Engagement</span>
+          </div>
+          <h3>Projek Profil Pelajar Pancasila (P5)</h3>
+          <p>
+            Implementasi pembelajaran berbasis proyek dengan tema "Suara
+            Demokrasi". Siswa diajak untuk melakukan simulasi pemilihan umum
+            (Pemilu) ketua OSIS sebagai bentuk praktik nyata dari sistem
+            demokrasi yang ada di Indonesia.
+          </p>
+        </div>
+
+        <div class="card reveal delay-2">
+          <div class="tags">
+            <span>Media Pembelajaran</span>
+            <span>Inovasi Pedagogik</span>
+          </div>
+          <h3>Simulasi Sidang BPUPKI Interaktif</h3>
+          <p>
+            Penerapan metode <i>Role Playing</i> (Bermain Peran) di mana peserta
+            didik merekonstruksi suasana sidang perumusan dasar negara. Praktik
+            ini bertujuan untuk membangun rasa empati sejarah dan pemahaman
+            mendalam tentang nilai-nilai musyawarah mufakat.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer id="lampiran">
+      <p>&copy; 2026 Nahlya, S.Pd - Portofolio Pendidikan Profesi Guru.</p>
+    </footer>
+
+    <script>
+      // 1. Efek Blur/Shadow pada Navbar saat di-scroll
+      window.addEventListener("scroll", () => {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // 2. Mobile Menu Toggle
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+
+      menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        const icon = menuBtn.querySelector("i");
+        if (navLinks.classList.contains("active")) {
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-times");
+        } else {
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        }
+      });
+
+      // 3. Dropdown logic untuk Mobile
+      const dropdowns = document.querySelectorAll(".dropdown");
+      dropdowns.forEach((dropdown) => {
+        dropdown.addEventListener("click", (e) => {
+          if (window.innerWidth <= 768) {
+            dropdown.classList.toggle("active");
+          }
+        });
+      });
+
+      // 4. Tutup menu saat link diklik (Mobile)
+      const links = document.querySelectorAll(
+        ".nav-links a:not(.dropdown > a)",
+      );
+      links.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (window.innerWidth <= 768) {
+            navLinks.classList.remove("active");
+            menuBtn.querySelector("i").classList.remove("fa-times");
+            menuBtn.querySelector("i").classList.add("fa-bars");
+          }
+        });
+      });
+
+      // 5. Scroll Reveal Animation
+      const revealElements = document.querySelectorAll(".reveal");
+
+      const revealOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const revealOnScroll = new IntersectionObserver(function (
+        entries,
+        observer,
+      ) {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          } else {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, revealOptions);
+
+      revealElements.forEach((el) => {
+        revealOnScroll.observe(el);
+      });
+    </script>
+  </body>
+</html>
