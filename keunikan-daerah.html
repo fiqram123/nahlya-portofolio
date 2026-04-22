@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keunikan Daerah | Portofolio PPG</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+      :root {
+        --bg-main: #0f172a;
+        --bg-surface: #1e293b;
+        --primary-color: #0ea5e9;
+        --accent-color: #10b981;
+        --text-main: #f8fafc;
+        --text-muted: #cbd5e1;
+        --border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+
+      /* ===== NAVBAR (TETAP SAMA) ===== */
+      nav {
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-color);
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      nav.scrolled {
+        padding: 10px 5%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-main);
+        text-decoration: none;
+        letter-spacing: 1px;
+      }
+
+      .logo span {
+        color: var(--primary-color);
+      }
+
+      ul.nav-links {
+        list-style: none;
+        display: flex;
+        align-items: center;
+      }
+
+      ul.nav-links li {
+        margin-left: 25px;
+        position: relative;
+      }
+
+      ul.nav-links a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-weight: 400;
+        font-size: 0.95rem;
+        transition: color 0.3s ease;
+        padding: 5px 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      ul.nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--primary-color);
+        transition: width 0.3s ease;
+      }
+
+      ul.nav-links a:hover {
+        color: var(--primary-color);
+      }
+
+      ul.nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .dropdown-content {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: 150%;
+        left: 0;
+        background-color: var(--bg-surface);
+        min-width: 250px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .dropdown:hover .dropdown-content {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+        top: 100%;
+      }
+
+      .dropdown-content a {
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .dropdown-content a::after {
+        display: none;
+      }
+      .dropdown-content a:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding-left: 25px;
+      }
+
+      .menu-btn {
+        display: none;
+        color: var(--text-main);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* ===== GLOBAL SECTIONS ===== */
+      section {
+        padding: 100px 5% 60px;
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      h2.section-title {
+        text-align: center;
+        font-size: 2.2rem;
+        color: var(--text-main);
+        margin-bottom: 60px;
+        position: relative;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      h2.section-title::after {
+        content: "";
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 2px;
+      }
+
+      /* ===== HERO SECTION DAERAH ===== */
+      #hero-daerah {
+        text-align: center;
+        padding-top: 160px;
+        padding-bottom: 80px;
+        background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+        position: relative;
+      }
+
+      #hero-daerah h1 {
+        font-size: 3.5rem;
+        color: var(--text-main);
+        margin-bottom: 20px;
+      }
+
+      #hero-daerah h1 span {
+        background: linear-gradient(
+          90deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      #hero-daerah p {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.8;
+      }
+
+      /* ===== CONTENT CARDS (SEJARAH & BUDAYA) ===== */
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .culture-card {
+        background-color: var(--bg-surface);
+        border-radius: 15px;
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .culture-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary-color);
+        box-shadow: 0 15px 30px rgba(14, 165, 233, 0.15);
+      }
+
+      .culture-img {
+        width: 100%;
+        height: 250px;
+        background-color: #2c3e50; /* Placeholder color */
+        position: relative;
+      }
+
+      .culture-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .culture-info {
+        padding: 30px;
+      }
+
+      .culture-info h3 {
+        color: var(--primary-color);
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+      }
+
+      .culture-info p {
+        color: var(--text-muted);
+        line-height: 1.7;
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+      }
+
+      /* ===== HIGHLIGHT SECTION (PERTANIAN/JAGUNG) ===== */
+      .highlight-section {
+        background: rgba(30, 41, 59, 0.5);
+        border-radius: 20px;
+        border: 1px solid var(--border-color);
+        padding: 50px;
+        max-width: 1000px;
+        margin: 80px auto 0;
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .highlight-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: var(--accent-color);
+      }
+
+      .highlight-icon {
+        font-size: 4rem;
+        color: var(--accent-color);
+        flex-shrink: 0;
+      }
+
+      .highlight-text h3 {
+        font-size: 1.8rem;
+        color: var(--text-main);
+        margin-bottom: 15px;
+      }
+
+      .highlight-text p {
+        color: var(--text-muted);
+        line-height: 1.8;
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        background-color: #080c17;
+        color: var(--text-muted);
+        text-align: center;
+        padding: 30px;
+        font-size: 0.9rem;
+        border-top: 1px solid var(--border-color);
+        margin-top: 50px;
+      }
+
+      /* ===== ANIMATIONS ===== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease-out;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .delay-1 {
+        transition-delay: 0.2s;
+      }
+      .delay-2 {
+        transition-delay: 0.4s;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 992px) {
+        #hero-daerah h1 {
+          font-size: 2.8rem;
+        }
+        .highlight-section {
+          flex-direction: column;
+          text-align: center;
+          padding: 40px 20px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .menu-btn {
+          display: block;
+        }
+        ul.nav-links {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: rgba(15, 23, 42, 0.98);
+          backdrop-filter: blur(15px);
+          flex-direction: column;
+          padding: 20px 0;
+          clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+          transition: all 0.4s ease;
+        }
+        ul.nav-links.active {
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+        ul.nav-links li {
+          margin: 15px 0;
+        }
+        .dropdown-content {
+          position: static;
+          visibility: visible;
+          opacity: 1;
+          box-shadow: none;
+          background: transparent;
+          border: none;
+          transform: none;
+          display: none;
+          width: 100%;
+          text-align: center;
+        }
+        .dropdown.active .dropdown-content {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="navbar">
+      <a href="index.html" class="logo">Portofolio<span>.</span></a>
+      <div class="menu-btn" id="menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html#home">Beranda</a></li>
+        <li class="dropdown" id="profil-dropdown">
+          <a href="#profil"
+            >Profil Mahasiswa
+            <i class="fas fa-chevron-down" style="font-size: 0.7em"></i
+          ></a>
+          <div class="dropdown-content">
+            <a href="index.html#profil">Tentang Saya</a>
+            <a href="keunikan-daerah.html">Keunikan Daerah</a>
+            <a href="index.html#profil">Inspirasi & Tujuan</a>
+          </div>
+        </li>
+        <li class="dropdown" id="artefak-dropdown">
+          <a href="index.html#artefak"
+            >Artefak Pembelajaran
+            <i class="fas fa-chevron-down" style="font-size: 0.7em"></i
+          ></a>
+          <div class="dropdown-content">
+            <a href="index.html#artefak">Siklus 1</a>
+            <a href="index.html#artefak">Siklus 2</a>
+            <a href="index.html#artefak">Siklus 3</a>
+          </div>
+        </li>
+        <li class="dropdown" id="lampiran-dropdown">
+          <a href="index.html#lampiran"
+            >Lampiran
+            <i class="fas fa-chevron-down" style="font-size: 0.7em"></i
+          ></a>
+          <div class="dropdown-content">
+            <a href="#">Penilaian Guru Pamong</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <section id="hero-daerah">
+      <div class="reveal">
+        <h1>Keunikan <span>Dana Mbojo</span></h1>
+        <p>
+          Menelusuri jejak sejarah, pesona adat istiadat, dan kearifan lokal
+          masyarakat Bima dan Dompu. Sebuah warisan budaya yang membentuk
+          karakter dan identitas yang kuat, selaras dengan semangat
+          <i>Maja Labo Dahu</i>.
+        </p>
+      </div>
+    </section>
+
+    <section id="budaya">
+      <div class="content-grid">
+        <div class="culture-card reveal">
+          <div class="culture-img">
+            <img
+              src="https://via.placeholder.com/400x250/1e293b/0ea5e9.png?text=Sejarah+Kesultanan"
+              alt="Sejarah Kesultanan Bima Dompu"
+            />
+          </div>
+          <div class="culture-info">
+            <h3>Sejarah Kesultanan</h3>
+            <p>
+              Bima dan Dompu memiliki akar sejarah kerajaan Islam yang sangat
+              kental. Kesultanan Bima menjadi salah satu pusat penyebaran agama
+              Islam yang penting di wilayah Timur Nusantara sejak abad ke-17.
+              Hubungan sejarah yang erat antara Bima dan Dompu membentuk
+              serumpun budaya yang sering disebut <i>Dou Mbojo</i>.
+            </p>
+          </div>
+        </div>
+
+        <div class="culture-card reveal delay-1">
+          <div class="culture-img">
+            <img
+              src="https://via.placeholder.com/400x250/1e293b/10b981.png?text=Budaya+Rimpu"
+              alt="Budaya Rimpu"
+            />
+          </div>
+          <div class="culture-info">
+            <h3>Tradisi Rimpu</h3>
+            <p>
+              Rimpu adalah cara berbusana khas perempuan Bima-Dompu menggunakan
+              sarung tenun khas (<i>Tembe Nggoli</i>). Rimpu bukan sekadar
+              pakaian, melainkan simbol implementasi syariat Islam yang berpadu
+              indah dengan kearifan penenun lokal, menciptakan identitas
+              kultural yang membedakannya dari daerah lain di Indonesia.
+            </p>
+          </div>
+        </div>
+
+        <div class="culture-card reveal delay-2">
+          <div class="culture-img">
+            <img
+              src="https://via.placeholder.com/400x250/1e293b/0ea5e9.png?text=Uma+Lengge"
+              alt="Uma Lengge"
+            />
+          </div>
+          <div class="culture-info">
+            <h3>Arsitektur Uma Lengge</h3>
+            <p>
+              Bangunan tradisional beratap kerucut ini merupakan mahakarya
+              arsitektur leluhur Bima. Uma Lengge awalnya berfungsi sebagai
+              lumbung padi (tempat menyimpan hasil panen) dan tempat tinggal.
+              Desainnya mencerminkan kecerdasan masyarakat lokal dalam menjaga
+              ketahanan pangan dan beradaptasi dengan kondisi alam.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-section reveal">
+        <div class="highlight-icon">
+          <i class="fas fa-seedling"></i>
+        </div>
+        <div class="highlight-text">
+          <h3>Agrikultur & Etos Kerja Pertanian</h3>
+          <p>
+            Selain kaya akan tradisi seperti Pacuan Kuda (<i>Pacoa Jara</i>),
+            Dompu dikenal memiliki etos kerja agraris yang sangat kuat. Wilayah
+            ini adalah lumbung pangan kebanggaan Nusa Tenggara Barat. Masyarakat
+            di pelosok desa, seperti di <b>Desa Dorebara</b>, menjaga harmoni
+            dengan alam melalui pertanian komoditas unggulan seperti jagung.
+            Dedikasi para petani inilah yang terus menginspirasi pengembangan
+            teknologi sistem cerdas dan riset terapan demi memajukan
+            kesejahteraan masyarakat lokal.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Nahlya, S.Pd - Portofolio Pendidikan Profesi Guru.</p>
+    </footer>
+
+    <script>
+      // Blur Navbar on Scroll
+      window.addEventListener("scroll", () => {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Mobile Menu
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+
+      menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        const icon = menuBtn.querySelector("i");
+        if (navLinks.classList.contains("active")) {
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-times");
+        } else {
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        }
+      });
+
+      // Mobile Dropdown
+      const dropdowns = document.querySelectorAll(".dropdown");
+      dropdowns.forEach((dropdown) => {
+        dropdown.addEventListener("click", (e) => {
+          if (window.innerWidth <= 768) {
+            dropdown.classList.toggle("active");
+          }
+        });
+      });
+
+      // Intersection Observer for Reveal Animation
+      const revealElements = document.querySelectorAll(".reveal");
+      const revealOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const revealOnScroll = new IntersectionObserver(function (
+        entries,
+        observer,
+      ) {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          } else {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, revealOptions);
+
+      revealElements.forEach((el) => {
+        revealOnScroll.observe(el);
+      });
+    </script>
+  </body>
+</html>

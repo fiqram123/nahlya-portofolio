@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Penilaian Guru Pamong | Portofolio PPG</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+      :root {
+        --bg-main: #0f172a;
+        --bg-surface: #1e293b;
+        --primary-color: #0ea5e9;
+        --accent-color: #10b981;
+        --text-main: #f8fafc;
+        --text-muted: #cbd5e1;
+        --border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+
+      /* ===== NAVBAR GLASSMORPHISM ===== */
+      nav {
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-color);
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      nav.scrolled {
+        padding: 10px 5%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-main);
+        text-decoration: none;
+        letter-spacing: 1px;
+      }
+
+      .logo span {
+        color: var(--primary-color);
+      }
+
+      ul.nav-links {
+        list-style: none;
+        display: flex;
+        align-items: center;
+      }
+
+      ul.nav-links li {
+        margin-left: 25px;
+        position: relative;
+      }
+
+      ul.nav-links a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-weight: 400;
+        font-size: 0.95rem;
+        transition: color 0.3s ease;
+        padding: 5px 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      ul.nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--primary-color);
+        transition: width 0.3s ease;
+      }
+
+      ul.nav-links a:hover {
+        color: var(--primary-color);
+      }
+
+      ul.nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .dropdown-content {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: 150%;
+        left: 0;
+        background-color: var(--bg-surface);
+        min-width: 250px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .dropdown:hover .dropdown-content {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+        top: 100%;
+      }
+
+      .dropdown-content a {
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .dropdown-content a::after {
+        display: none;
+      }
+      .dropdown-content a:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding-left: 25px;
+      }
+
+      .menu-btn {
+        display: none;
+        color: var(--text-main);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* ===== HERO SECTION PENILAIAN ===== */
+      #hero-penilaian {
+        text-align: center;
+        padding-top: 150px;
+        padding-bottom: 50px;
+        background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+        position: relative;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      #hero-penilaian h3 {
+        color: var(--accent-color);
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      #hero-penilaian h1 {
+        font-size: 3rem;
+        color: var(--text-main);
+        margin-bottom: 15px;
+      }
+
+      #hero-penilaian p {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      /* ===== KONTEN PENILAIAN ===== */
+      .content-wrapper {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 60px 5%;
+      }
+
+      /* Profil Guru Pamong */
+      .pamong-profile {
+        display: flex;
+        align-items: center;
+        background-color: var(--bg-surface);
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 40px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .pamong-icon {
+        width: 80px;
+        height: 80px;
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--accent-color);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.5rem;
+        margin-right: 25px;
+        flex-shrink: 0;
+      }
+
+      .pamong-details h2 {
+        font-size: 1.5rem;
+        color: var(--text-main);
+        margin-bottom: 5px;
+      }
+
+      .pamong-details p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      /* Grid Nilai Kompetensi */
+      .kompetensi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin-bottom: 50px;
+      }
+
+      .kompetensi-card {
+        background-color: var(--bg-surface);
+        border-radius: 12px;
+        padding: 25px;
+        border: 1px solid var(--border-color);
+        text-align: center;
+        transition: transform 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .kompetensi-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--primary-color);
+      }
+
+      .kompetensi-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(14, 165, 233, 0.1);
+      }
+
+      .score-circle {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 15px;
+        border-radius: 50%;
+        border: 3px solid var(--primary-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-main);
+        background: rgba(14, 165, 233, 0.1);
+      }
+
+      .kompetensi-card h4 {
+        color: var(--text-muted);
+        font-size: 1rem;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .kompetensi-card p {
+        color: var(--accent-color);
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      /* Ulasan & Catatan Kualitatif */
+      .ulasan-section {
+        background: linear-gradient(
+          135deg,
+          rgba(14, 165, 233, 0.05) 0%,
+          rgba(16, 185, 129, 0.05) 100%
+        );
+        border-radius: 15px;
+        border-left: 5px solid var(--primary-color);
+        padding: 40px;
+        position: relative;
+      }
+
+      .ulasan-section i.fa-quote-left {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 3rem;
+        color: rgba(255, 255, 255, 0.05);
+      }
+
+      .ulasan-section h3 {
+        color: var(--text-main);
+        margin-bottom: 20px;
+        font-size: 1.4rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .ulasan-content {
+        color: var(--text-muted);
+        line-height: 1.8;
+        font-size: 1.05rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .ulasan-content p {
+        margin-bottom: 15px;
+        text-align: justify;
+      }
+
+      .btn-download {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 30px;
+        margin-top: 30px;
+        background: var(--primary-color);
+        color: var(--text-main);
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+      }
+
+      .btn-download:hover {
+        background: #0284c7;
+        transform: translateY(-2px);
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        background-color: #080c17;
+        color: var(--text-muted);
+        text-align: center;
+        padding: 30px;
+        font-size: 0.9rem;
+        border-top: 1px solid var(--border-color);
+      }
+
+      /* ===== ANIMATIONS ===== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease-out;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .delay-1 {
+        transition-delay: 0.2s;
+      }
+      .delay-2 {
+        transition-delay: 0.4s;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 768px) {
+        .menu-btn {
+          display: block;
+        }
+        ul.nav-links {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: rgba(15, 23, 42, 0.98);
+          backdrop-filter: blur(15px);
+          flex-direction: column;
+          padding: 20px 0;
+          clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+          transition: all 0.4s ease;
+        }
+        ul.nav-links.active {
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+        ul.nav-links li {
+          margin: 15px 0;
+        }
+        .dropdown-content {
+          position: static;
+          visibility: visible;
+          opacity: 1;
+          box-shadow: none;
+          background: transparent;
+          border: none;
+          transform: none;
+          display: none;
+          width: 100%;
+          text-align: center;
+        }
+        .dropdown.active .dropdown-content {
+          display: flex;
+        }
+
+        #hero-penilaian h1 {
+          font-size: 2.2rem;
+        }
+        .pamong-profile {
+          flex-direction: column;
+          text-align: center;
+        }
+        .pamong-icon {
+          margin-right: 0;
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="navbar">
+      <a href="index.html" class="logo">Portofolio<span>.</span></a>
+      <div class="menu-btn" id="menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html#home">Beranda</a></li>
+        <li class="dropdown" id="profil-dropdown">
+          <a href="#profil"
+            >Profil Mahasiswa
+            <i class="fas fa-chevron-down" style="font-size: 0.7em"></i
+          ></a>
+          <div class="dropdown-content">
+            <a href="index.html#profil">Tentang Saya</a>
+            <a href="keunikan-daerah.html">Keunikan Daerah</a>
+            <a href="inspirasi.html">Inspirasi & Tujuan</a>
+          </div>
+        </li>
+        <li class="dropdown" id="artefak-dropdown">
+          <a href="index.html#artefak"
+            >Artefak Pembelajaran
+            <i class="fas fa-chevron-down" style="font-size: 0.7em"></i
+          ></a>
+          <div class="dropdown-content">
+            <a href="artefak1.html">Siklus 1</a>
+            <a href="artefak2.html">Siklus 2</a>
+            <a href="artefak3.html">Siklus 3</a>
+          </div>
+        </li>
+        <li class="dropdown" id="lampiran-dropdown">
+          <a href="#lampiran"
+            >Lampiran
+            <i class="fas fa-chevron-down" style="font-size: 0.7em"></i
+          ></a>
+          <div class="dropdown-content">
+            <a href="penilaian.html">Penilaian Guru Pamong</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <section id="hero-penilaian">
+      <div class="reveal">
+        <h3>Evaluasi Praktik Pembelajaran</h3>
+        <h1>Penilaian Guru Pamong</h1>
+        <p>
+          Rekapitulasi hasil observasi, bimbingan, dan evaluasi kualitatif dari
+          Guru Pamong selama pelaksanaan Praktik Pengalaman Lapangan (PPL) PPG.
+        </p>
+      </div>
+    </section>
+
+    <section class="content-wrapper">
+      <div class="pamong-profile reveal">
+        <div class="pamong-icon">
+          <i class="fas fa-user-tie"></i>
+        </div>
+        <div class="pamong-details">
+          <h2>Hj. Siti Aminah, S.Pd., M.Pd.</h2>
+          <p>
+            <strong>Guru Pamong Mata Pelajaran PPKn</strong><br />
+            Sekolah Mitra Praktik Pengalaman Lapangan (PPL) Mahasiswa PPG.<br />
+            NIP. 19780512 200501 2 008
+          </p>
+        </div>
+      </div>
+
+      <div class="kompetensi-grid">
+        <div class="kompetensi-card reveal delay-1">
+          <div class="score-circle">92</div>
+          <h4>Kompetensi Pedagogik</h4>
+          <p>Sangat Baik</p>
+        </div>
+        <div class="kompetensi-card reveal delay-1">
+          <div class="score-circle">95</div>
+          <h4>Kompetensi Profesional</h4>
+          <p>Sangat Baik</p>
+        </div>
+        <div class="kompetensi-card reveal delay-2">
+          <div class="score-circle">90</div>
+          <h4>Kompetensi Kepribadian</h4>
+          <p>Sangat Baik</p>
+        </div>
+        <div class="kompetensi-card reveal delay-2">
+          <div class="score-circle">94</div>
+          <h4>Kompetensi Sosial</h4>
+          <p>Sangat Baik</p>
+        </div>
+      </div>
+
+      <div class="ulasan-section reveal">
+        <i class="fas fa-quote-left"></i>
+        <h3>Catatan Reflektif & Umpan Balik</h3>
+        <div class="ulasan-content">
+          <p>
+            "Selama melaksanakan kegiatan Praktik Pengalaman Lapangan (PPL),
+            Saudari <strong>Nahlya, S.Pd.</strong> telah menunjukkan dedikasi
+            dan profesionalisme yang sangat tinggi sebagai calon pendidik. Ia
+            mampu menyusun Perangkat Pembelajaran (Modul Ajar) PPKn yang tidak
+            hanya sesuai dengan kurikulum yang berlaku, tetapi juga
+            mengintegrasikan nilai-nilai kearifan lokal dan Projek Penguatan
+            Profil Pelajar Pancasila (P5) dengan sangat kreatif."
+          </p>
+          <p>
+            "Kemampuan penguasaan kelas patut diapresiasi. Nahlya berhasil
+            menerapkan metode <em>Differentiated Instruction</em> dan simulasi
+            interaktif (seperti simulasi sidang BPUPKI) yang membuat peserta
+            didik yang awalnya pasif menjadi lebih antusias dan berani
+            mengemukakan pendapat di kelas. Hubungan sosial dengan rekan guru,
+            tenaga kependidikan, serta peserta didik juga terjalin dengan sangat
+            harmonis."
+          </p>
+          <p>
+            <strong>Saran Pengembangan:</strong> Pertahankan semangat
+            <em>Growth Mindset</em> yang telah dimiliki. Ke depannya, teruslah
+            mengeksplorasi penggunaan media digital interaktif untuk membuat
+            materi kewarganegaraan dan konstitusi yang bersifat teoritis menjadi
+            semakin kontekstual bagi generasi Z.
+          </p>
+        </div>
+
+        <div style="text-align: center">
+          <a href="#" class="btn-download"
+            ><i class="fas fa-file-pdf"></i> Unduh Scan Lembar Penilaian Resmi
+            (PDF)</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Nahlya, S.Pd - Portofolio Pendidikan Profesi Guru.</p>
+    </footer>
+
+    <script>
+      // Blur Navbar on Scroll
+      window.addEventListener("scroll", () => {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Mobile Menu
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+
+      menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        const icon = menuBtn.querySelector("i");
+        if (navLinks.classList.contains("active")) {
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-times");
+        } else {
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        }
+      });
+
+      // Mobile Dropdown
+      const dropdowns = document.querySelectorAll(".dropdown");
+      dropdowns.forEach((dropdown) => {
+        dropdown.addEventListener("click", (e) => {
+          if (window.innerWidth <= 768) {
+            dropdown.classList.toggle("active");
+          }
+        });
+      });
+
+      // Intersection Observer for Reveal Animation
+      const revealElements = document.querySelectorAll(".reveal");
+      const revealOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const revealOnScroll = new IntersectionObserver(function (
+        entries,
+        observer,
+      ) {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          } else {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, revealOptions);
+
+      revealElements.forEach((el) => {
+        revealOnScroll.observe(el);
+      });
+    </script>
+  </body>
+</html>
