@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artefak Pembelajaran Siklus 1 | Portofolio PPG</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+      :root {
+        --bg-main: #0f172a;
+        --bg-surface: #1e293b;
+        --primary-color: #0ea5e9;
+        --accent-color: #10b981;
+        --text-main: #f8fafc;
+        --text-muted: #cbd5e1;
+        --border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+
+      /* ===== NAVBAR GLASSMORPHISM ===== */
+      nav {
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-color);
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      nav.scrolled {
+        padding: 10px 5%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-main);
+        text-decoration: none;
+        letter-spacing: 1px;
+      }
+
+      .logo span {
+        color: var(--primary-color);
+      }
+
+      ul.nav-links {
+        list-style: none;
+        display: flex;
+        align-items: center;
+      }
+
+      ul.nav-links li {
+        margin-left: 25px;
+        position: relative;
+      }
+
+      ul.nav-links a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-weight: 400;
+        font-size: 0.95rem;
+        transition: color 0.3s ease;
+        padding: 5px 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      ul.nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--primary-color);
+        transition: width 0.3s ease;
+      }
+
+      ul.nav-links a:hover {
+        color: var(--primary-color);
+      }
+
+      ul.nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .dropdown-content {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: 150%;
+        left: 0;
+        background-color: var(--bg-surface);
+        min-width: 250px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .dropdown:hover .dropdown-content {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+        top: 100%;
+      }
+
+      .dropdown-content a {
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .dropdown-content a::after {
+        display: none;
+      }
+      .dropdown-content a:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding-left: 25px;
+      }
+
+      .menu-btn {
+        display: none;
+        color: var(--text-main);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* ===== HERO SECTION ARTEFAK ===== */
+      #hero-artefak {
+        text-align: center;
+        padding-top: 150px;
+        padding-bottom: 50px;
+        background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+        position: relative;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      #hero-artefak h3 {
+        color: var(--accent-color);
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      #hero-artefak h1 {
+        font-size: 3rem;
+        color: var(--text-main);
+        margin-bottom: 15px;
+      }
+
+      #hero-artefak p {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      /* ===== KONTEN ARTEFAK (MODUL, VIDEO, ANALISIS) ===== */
+      .content-wrapper {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 60px 5%;
+      }
+
+      .artefak-section {
+        background-color: var(--bg-surface);
+        border-radius: 15px;
+        border: 1px solid var(--border-color);
+        padding: 40px;
+        margin-bottom: 50px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Garis aksen di sisi kiri card */
+      .artefak-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          var(--primary-color),
+          var(--accent-color)
+        );
+      }
+
+      .section-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 15px;
+      }
+
+      .section-header i {
+        font-size: 1.8rem;
+        color: var(--primary-color);
+        margin-right: 15px;
+      }
+
+      .section-header h2 {
+        font-size: 1.8rem;
+        color: var(--text-main);
+      }
+
+      /* Wadah Iframe Responsif (Untuk YouTube & PPT) */
+      .iframe-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9; /* Membuat rasio otomatis 16:9 */
+        border-radius: 12px;
+        overflow: hidden;
+        border: 2px solid rgba(255, 255, 255, 0.05);
+        background-color: #000;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .iframe-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      /* Teks Analisis */
+      .analisis-content p {
+        color: var(--text-muted);
+        line-height: 1.8;
+        font-size: 1.05rem;
+        margin-bottom: 20px;
+        text-align: justify;
+      }
+
+      .analisis-content strong {
+        color: var(--primary-color);
+      }
+
+      .btn-download {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 25px;
+        margin-top: 20px;
+        background: rgba(14, 165, 233, 0.1);
+        color: var(--primary-color);
+        text-decoration: none;
+        border-radius: 30px;
+        border: 1px solid var(--primary-color);
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-download:hover {
+        background: var(--primary-color);
+        color: var(--bg-main);
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        background-color: #080c17;
+        color: var(--text-muted);
+        text-align: center;
+        padding: 30px;
+        font-size: 0.9rem;
+        border-top: 1px solid var(--border-color);
+      }
+
+      /* ===== ANIMATIONS ===== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease-out;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .delay-1 {
+        transition-delay: 0.2s;
+      }
+      .delay-2 {
+        transition-delay: 0.4s;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 768px) {
+        .menu-btn {
+          display: block;
+        }
+        ul.nav-links {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: rgba(15, 23, 42, 0.98);
+          backdrop-filter: blur(15px);
+          flex-direction: column;
+          padding: 20px 0;
+          clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+          transition: all 0.4s ease;
+        }
+        ul.nav-links.active {
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+        ul.nav-links li {
+          margin: 15px 0;
+        }
+        .dropdown-content {
+          position: static;
+          visibility: visible;
+          opacity: 1;
+          box-shadow: none;
+          background: transparent;
+          border: none;
+          transform: none;
+          display: none;
+          width: 100%;
+          text-align: center;
+        }
+        .dropdown.active .dropdown-content {
+          display: flex;
+        }
+
+        #hero-artefak h1 {
+          font-size: 2.2rem;
+        }
+        .artefak-section {
+          padding: 25px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="navbar">
+      <a href="index.html" class="logo">Portofolio<span>.</span></a>
+      <div class="menu-btn" id="menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html#home">Beranda</a></li>
+        <li class="dropdown" id="profil-dropdown">
+          <a href="#profil"
+            >Profil Mahasiswa
+            <i class="fas fa-chevron-down" style="font-size: 0.7em"></i
+          ></a>
+          <div class="dropdown-content">
+            <a href="index.html#profil">Tentang Saya</a>
+            <a href="keunikan-daerah.html">Keunikan Daerah</a>
+            <a href="inspirasi.html">Inspirasi & Tujuan</a>
+          </div>
+        </li>
+        <li class="dropdown" id="artefak-dropdown">
+          <a href="#artefak"
+            >Artefak Pembelajaran
+            <i class="fas fa-chevron-down" style="font-size: 0.7em"></i
+          ></a>
+          <div class="dropdown-content">
+            <a href="artefak1.html">Siklus 1</a>
+            <a href="artefak2.html">Siklus 2</a>
+            <a href="artefak3.html">Siklus 3</a>
+          </div>
+        </li>
+        <li class="dropdown" id="lampiran-dropdown">
+          <a href="index.html#lampiran"
+            >Lampiran
+            <i class="fas fa-chevron-down" style="font-size: 0.7em"></i
+          ></a>
+          <div class="dropdown-content">
+            <a href="penilaian.html">Penilaian Guru Pamong</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <section id="hero-artefak">
+      <div class="reveal">
+        <h3>Artefak Pembelajaran</h3>
+        <h1>Siklus 1</h1>
+        <p>
+          Dokumentasi penerapan Modul Ajar, implementasi pembelajaran di kelas
+          melalui Video Terbimbing, serta Analisis Reflektif dari proses
+          mengajar.
+        </p>
+      </div>
+    </section>
+
+    <section class="content-wrapper">
+      <div class="artefak-section reveal">
+        <div class="section-header">
+          <i class="fas fa-file-powerpoint"></i>
+          <h2>Modul Ajar & Presentasi (PPT)</h2>
+        </div>
+        <div class="iframe-container">
+          <iframe
+            src="https://docs.google.com/presentation/d/e/2PACX-1vQ-Placeholder-ID/embed?start=false&loop=false&delayms=3000"
+            frameborder="0"
+            allowfullscreen="true"
+            mozallowfullscreen="true"
+            webkitallowfullscreen="true"
+          >
+          </iframe>
+        </div>
+        <p
+          style="margin-top: 15px; color: var(--text-muted); font-size: 0.9rem"
+        >
+          <i
+            >*Catatan: Ganti atribut <code>src</code> pada iframe di atas dengan
+            link Embed dari Google Slides atau OneDrive milik Anda.</i
+          >
+        </p>
+        <a href="#" class="btn-download"
+          ><i class="fas fa-download"></i> Unduh Modul Ajar (PDF)</a
+        >
+      </div>
+
+      <div class="artefak-section reveal delay-1">
+        <div class="section-header">
+          <i class="fas fa-video"></i>
+          <h2>Video Praktik Terbimbing</h2>
+        </div>
+        <div class="iframe-container">
+          <iframe
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="Video Praktik Terbimbing"
+            frameborder="0"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+              web-share;
+            "
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+        <p
+          style="margin-top: 15px; color: var(--text-muted); font-size: 0.9rem"
+        >
+          <i
+            >*Catatan: Ganti tulisan <code>dQw4w9WgXcQ</code> pada link YouTube
+            di atas dengan ID video praktik Anda sendiri.</i
+          >
+        </p>
+      </div>
+
+      <div class="artefak-section reveal delay-2">
+        <div class="section-header">
+          <i class="fas fa-chart-line"></i>
+          <h2>Analisis & Refleksi Pembelajaran</h2>
+        </div>
+        <div class="analisis-content">
+          <p>
+            <strong>Identifikasi Masalah:</strong> Pada Siklus 1 ini, tantangan
+            utama yang dihadapi adalah tingkat partisipasi aktif peserta didik
+            yang masih bervariasi. Beberapa siswa dengan latar belakang
+            pemahaman teknologi yang kurang merasa tertinggal, sementara siswa
+            lainnya membutuhkan tantangan lebih. Hal ini menunjukkan perlunya
+            penerapan strategi <i>Differentiated Instruction</i> (Pembelajaran
+            Berdiferensiasi) yang lebih matang.
+          </p>
+          <p>
+            <strong>Tindakan yang Dilakukan:</strong> Saya mengimplementasikan
+            pendekatan <i>Deep Learning</i> dengan membagi siswa ke dalam
+            kelompok heterogen. Media pembelajaran berupa PPT interaktif
+            (seperti yang terlampir) dirancang untuk mengakomodasi gaya belajar
+            visual, sementara video praktik membantu siswa auditori dan
+            kinestetik.
+          </p>
+          <p>
+            <strong>Hasil dan Evaluasi:</strong> Terjadi peningkatan
+            keterlibatan siswa secara keseluruhan. Mengintegrasikan pemikiran
+            komputasional ke dalam pemecahan masalah sehari-hari terbukti
+            meningkatkan motivasi belajar. Namun, manajemen waktu saat
+            membimbing kelompok yang lambat (<i>slow learners</i>) perlu
+            dievaluasi dan diperbaiki untuk perencanaan Siklus 2 ke depannya
+            guna memastikan filosofi <i>Growth Mindset</i> benar-benar
+            tersampaikan ke seluruh peserta didik.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Nahlya, S.Pd - Portofolio Pendidikan Profesi Guru.</p>
+    </footer>
+
+    <script>
+      // Blur Navbar on Scroll
+      window.addEventListener("scroll", () => {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Mobile Menu
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+
+      menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        const icon = menuBtn.querySelector("i");
+        if (navLinks.classList.contains("active")) {
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-times");
+        } else {
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        }
+      });
+
+      // Mobile Dropdown
+      const dropdowns = document.querySelectorAll(".dropdown");
+      dropdowns.forEach((dropdown) => {
+        dropdown.addEventListener("click", (e) => {
+          if (window.innerWidth <= 768) {
+            dropdown.classList.toggle("active");
+          }
+        });
+      });
+
+      // Intersection Observer for Reveal Animation
+      const revealElements = document.querySelectorAll(".reveal");
+      const revealOptions = {
+        threshold: 0.1, // Dimunculkan sedikit lebih cepat
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const revealOnScroll = new IntersectionObserver(function (
+        entries,
+        observer,
+      ) {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          } else {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, revealOptions);
+
+      revealElements.forEach((el) => {
+        revealOnScroll.observe(el);
+      });
+    </script>
+  </body>
+</html>
